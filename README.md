@@ -1,2 +1,2 @@
 # BStat
-Business Statistics
+Business Statistics - UG
