@@ -123,9 +123,39 @@ abline(h = 4/length(cooks_d),
        col = "red", lty = 2)
 
 
-# Interpretation:
-# Points above the horizontal red line may be influential.
-# Investigate these observations further.
+#----
+
+# Explore Categorical Variables
+str(possum_data)
+
+# Choose and Inspect 'sex' Variable
+table(possum_data$sex)      # Frequency table
+str(possum_data$sex)        # Check if it's a factor
+
+# Set Reference Category
+possum_data$sex <- factor(possum_data$sex)
+possum_data$sex <- relevel(possum_data$sex, ref = "m")
+
+
+# Run the Regression
+model_cat <- lm(hdlngth ~ totlngth + sex, data = possum_data)
+
+# View the Model Summary
+summary(model_cat)
+
+
+
+# Visualize Group Differences with a Boxplot
+boxplot(hdlngth ~ sex, data = possum_data,
+        col = c("skyblue", "pink"),
+        main = "Head Length by Sex",
+        ylab = "Head Length (cm)")
+
+# Run Diagnostic Plots
+par(mfrow = c(2, 2))
+plot(model_cat)
+par(mfrow = c(1, 1))
+
 
 
 
